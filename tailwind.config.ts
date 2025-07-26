@@ -52,6 +52,10 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				'imc-navy': 'hsl(var(--imc-navy))',
+				'imc-orange': 'hsl(var(--imc-orange))',
+				'imc-cream': 'hsl(var(--imc-cream))',
+				'imc-navy-light': 'hsl(var(--imc-navy-light))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
