@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate=useNavigate();
   return (
     <header className="w-full bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -20,7 +22,7 @@ const Header = () => {
             <ExternalLink className="w-4 h-4 mr-2" />
             Explore IMC
           </Button>
-          <Button variant="cta" size="sm">
+          <Button variant="cta" size="sm" onClick={()=>{navigate('/login')}}>
             Login to Report
           </Button>
         </div>
