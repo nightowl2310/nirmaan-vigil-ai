@@ -18,7 +18,7 @@ const Login: React.FC = () => {
     <div className="h-screen w-screen flex">
       
       {/* Left Side: Form */}
-      <div className="w-1/2 flex items-center justify-center" style={{ backgroundColor: '#f6f1eb' }}>
+      <div className="w-1/2 flex items-center justify-center" style={{ backgroundColor: '#EEE9E2' }}>
         <form
           onSubmit={handleSubmit}
           className="flex flex-col items-center justify-center gap-4 p-6 rounded-lg border border-transparent hover:border-black transition-all duration-300 max-w-sm w-full mx-4"
