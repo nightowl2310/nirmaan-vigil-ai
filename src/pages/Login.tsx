@@ -34,7 +34,7 @@ const Login: React.FC = () => {
               id="username"
               type="text"
               value={username}
-              placeholder=''
+              placeholder='user id'
               onChange={(e) => setUsername(e.target.value)}
               className="bg-transparent border-b border-black outline-none text-black px-1 py-1"
               required
@@ -48,6 +48,7 @@ const Login: React.FC = () => {
             <input
               id="passcode"
               type="password"
+              placeholder='passcode'
               value={passcode}
               onChange={(e) => setPasscode(e.target.value)}
               className="bg-transparent border-b border-black outline-none text-black px-1 py-1"
