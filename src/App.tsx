@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import ComplaintForm from "./pages/ComplaintForm";
 import ComplaintDashboard from "./pages/ComplaintDashboard";
+import ThankYou from "./pages/Thankyou";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/login" element={<Login/>}/>
           <Route path="/complain" element={<ComplaintForm/>}/>
           <Route path="/complaints" element={<ComplaintDashboard/>}/>
+          <Route path="/complain_done" element={<ThankYou/>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

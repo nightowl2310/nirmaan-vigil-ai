@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const ComplaintForm = () => {
   const [buildingImages, setBuildingImages] = useState<File[]>([]);
   const [qrImage, setQrImage] = useState<File | null>(null);
@@ -27,7 +27,7 @@ const ComplaintForm = () => {
   const removeBuildingImage = (index: number) => {
     setBuildingImages((prev) => prev.filter((_, i) => i !== index));
   };
-
+  const navigate=useNavigate();
   return (
     <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-8 border border-orange-200">
       <div className="text-center">
@@ -78,6 +78,10 @@ const ComplaintForm = () => {
             <input placeholder="Enter ward number" className="w-full p-2 border rounded-md" />
           </div>
           <div>
+            <label className="block mb-1 font-medium">Pin Code <span className="text-red-500">*</span></label>
+            <input placeholder="Enter Pin Code" className="w-full p-2 border rounded-md" />
+          </div>
+          <div>
             <label className="block mb-1 font-medium">City <span className="text-red-500">*</span></label>
             <input placeholder="Enter city" className="w-full p-2 border rounded-md" required />
           </div>
@@ -117,6 +121,7 @@ const ComplaintForm = () => {
           </ul>
         </div>
         <div style={{display:'flex',justifyContent:'center',fontWeight:'bold'}}>Complainer's Details(Optional):</div>
+        <span className="text-red-500">*Note-If complainer choose to be anonymous and not submit his/her details they will not recieve the reward for their complain </span>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block mb-1 font-medium">Complainer Name</label>
@@ -145,6 +150,7 @@ const ComplaintForm = () => {
           <button
             type="submit"
             className="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600"
+            onClick={()=>[navigate('/complain_done')]}
           >
             Submit
           </button>

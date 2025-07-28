@@ -59,6 +59,7 @@ const Login: React.FC = () => {
               <label htmlFor="remember">Remember Me</label>
             </div>
             <button
+            onClick={()=>{navigate('/complain')}}
               type="submit"
               className="text-black border border-transparent px-4 py-2 mt-2 rounded hover:border-black hover:underline transition-all font-semibold"
             >
@@ -109,6 +110,7 @@ const Login: React.FC = () => {
               <label htmlFor="remember">Remember Me</label>
             </div>
             <button
+            onClick={()=>{navigate('/complain')}}
               type="submit"
               className="text-black border border-transparent px-4 py-2 mt-2 rounded hover:border-black hover:underline transition-all font-semibold"
             >

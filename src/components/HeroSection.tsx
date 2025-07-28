@@ -30,7 +30,7 @@ const HeroSection = () => {
             <Button variant="hero" size="lg" className="text-lg px-8 py-4"  onClick={()=>{navigate('/login')}}>
               Login to Report
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-black text-white hover:bg-white hover:text-primary">
+            <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-black text-white bg-white text-primary">
               Learn More
             </Button>
           </div>
