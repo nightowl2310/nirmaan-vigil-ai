@@ -10,7 +10,7 @@ const CitizenPanel = () => {
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.8 }}
         className="text-4xl font-bold mb-10 sticky top-4 bg-[#f6f0e0] z-10"
       >
         🧑‍💼 Welcome, Citizen!
@@ -19,7 +19,7 @@ const CitizenPanel = () => {
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 100 }}
+        transition={{ type: "spring", stiffness: 80 }}
         className="flex flex-col gap-6 w-full max-w-md"
       >
         <button

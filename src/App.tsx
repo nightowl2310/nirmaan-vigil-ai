@@ -3,14 +3,26 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
-import ComplaintForm from "./pages/ComplaintForm";
-import ComplaintDashboard from "./pages/ComplaintDashboard";
 import CitizenPanel from "./pages/CitizenPanel";
-// import AdminDashboard from "./pages/AdminDashboard";      // ✅ Import this
-// import EmployeeDashboard from "./pages/EmployeeDashboard"; // ✅ Import this
+import ComplaintDashboard from "./pages/citizen/ComplaintDashboard";
+
+
+
+// ✅ Updated paths after moving to /citizen folder
+import ComplaintForm from "./pages/citizen/ComplaintForm";
+import ComplainDone from "./pages/citizen/ComplainDone";
+// import ComplaintDashboard from "./pages/citizen/ComplaintDashboard";
+import ComplaintStatus from "./pages/citizen/ComplainStatus";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+
+
+// Optionally later you can uncomment below
+// import AdminDashboard from "./pages/AdminDashboard";
+// import EmployeeDashboard from "./pages/EmployeeDashboard";
 
 const queryClient = new QueryClient();
 
@@ -21,16 +33,21 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* Common Routes */}
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
-          
-          
-          {/* <Route path="/admin" element={<AdminDashboard />} />       {/* ✅ Added */}
-          {/* <Route path="/employee" element={<EmployeeDashboard />} /> ✅ Added */} 
           <Route path="/citizen" element={<CitizenPanel />} />
-          <Route path="/complain" element={<ComplaintForm />} />
-          <Route path="/complaints" element={<ComplaintDashboard />} />
           <Route path="*" element={<NotFound />} />
+
+          {/* ✅ Citizen Routes */}
+          <Route path="/complaint-form" element={<ComplaintForm />} />
+          <Route path="/complain_done" element={<ComplainDone />} />
+          <Route path="/complaint-dashboard" element={<ComplaintDashboard />} />
+          <Route path="/complaint-status" element={<ComplaintStatus />} />
+
+          {/* ✅ Admin Route */}
+          <Route path="/admin" element={<AdminDashboard />} />
+
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
