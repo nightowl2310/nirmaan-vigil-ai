@@ -10,13 +10,21 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ username, passcode, rememberMe });
-    navigate('/report');
+
+    if (username === "admin" && passcode === "1") {
+      navigate("/admin");
+    } else if (username === "employee" && passcode === "1") {
+      navigate("/employee");
+    } else if (username === "citizen" && passcode === "1") {
+      navigate("/citizen");
+    } else {
+      alert("Invalid credentials");
+    }
   };
 
   return (
     <>
-      {/* MOBILE VIEW: Background image + form on top */}
+      {/* MOBILE VIEW */}
       <div
         className="md:hidden min-h-screen w-full bg-cover bg-center flex items-center justify-center p-4"
         style={{ backgroundImage: `url(${bgImage})` }}
@@ -59,7 +67,6 @@ const Login: React.FC = () => {
               <label htmlFor="remember">Remember Me</label>
             </div>
             <button
-            onClick={()=>{navigate('/complain')}}
               type="submit"
               className="text-black border border-transparent px-4 py-2 mt-2 rounded hover:border-black hover:underline transition-all font-semibold"
             >
@@ -69,9 +76,8 @@ const Login: React.FC = () => {
         </div>
       </div>
 
-      {/* DESKTOP VIEW: Split layout */}
+      {/* DESKTOP VIEW */}
       <div className="hidden md:flex h-screen w-full">
-        {/* Left: Form */}
         <div className="w-1/2 flex items-center justify-center" style={{ backgroundColor: '#f6f1eb' }}>
           <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center gap-4 p-6 rounded-lg border border-transparent hover:border-black transition-all duration-300 max-w-sm w-full mx-4">
             <h2 className="text-xl font-semibold text-black">Login</h2>
@@ -110,7 +116,6 @@ const Login: React.FC = () => {
               <label htmlFor="remember">Remember Me</label>
             </div>
             <button
-            onClick={()=>{navigate('/complain')}}
               type="submit"
               className="text-black border border-transparent px-4 py-2 mt-2 rounded hover:border-black hover:underline transition-all font-semibold"
             >
@@ -118,8 +123,6 @@ const Login: React.FC = () => {
             </button>
           </form>
         </div>
-
-        {/* Right: Full-height image that fills its side completely */}
         <div className="w-1/2 h-full">
           <img
             src={bgImage}

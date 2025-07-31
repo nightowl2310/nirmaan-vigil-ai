@@ -8,7 +8,9 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import ComplaintForm from "./pages/ComplaintForm";
 import ComplaintDashboard from "./pages/ComplaintDashboard";
-import ThankYou from "./pages/Thankyou";
+import CitizenPanel from "./pages/CitizenPanel";
+// import AdminDashboard from "./pages/AdminDashboard";      // ✅ Import this
+// import EmployeeDashboard from "./pages/EmployeeDashboard"; // ✅ Import this
 
 const queryClient = new QueryClient();
 
@@ -20,11 +22,14 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/complain" element={<ComplaintForm/>}/>
-          <Route path="/complaints" element={<ComplaintDashboard/>}/>
-          <Route path="/complain_done" element={<ThankYou/>}/>
+          <Route path="/login" element={<Login />} />
+          
+          
+          {/* <Route path="/admin" element={<AdminDashboard />} />       {/* ✅ Added */}
+          {/* <Route path="/employee" element={<EmployeeDashboard />} /> ✅ Added */} 
+          <Route path="/citizen" element={<CitizenPanel />} />
+          <Route path="/complain" element={<ComplaintForm />} />
+          <Route path="/complaints" element={<ComplaintDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
