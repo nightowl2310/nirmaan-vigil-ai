@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 type Complaint = {
   id: number;
@@ -16,6 +17,7 @@ interface ComplaintPopupProps {
 }
 
 const ComplaintPopup: React.FC<ComplaintPopupProps> = ({ complaint, onClose }) => {
+  const navigate=useNavigate();
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
       <motion.div
@@ -45,6 +47,12 @@ const ComplaintPopup: React.FC<ComplaintPopupProps> = ({ complaint, onClose }) =
           </span>
         </p>
 
+        <button
+        onClick={()=>navigate('/verify')}
+          className="mt-6 w-full bg-red-500 hover:bg-green-600 text-white py-2 rounded-lg"
+        >
+          Verify
+        </button>
         <button
           onClick={onClose}
           className="mt-6 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg"

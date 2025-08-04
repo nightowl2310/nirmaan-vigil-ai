@@ -18,6 +18,7 @@ import ComplainDone from "./pages/citizen/ComplainDone";
 // import ComplaintDashboard from "./pages/citizen/ComplaintDashboard";
 import ComplaintStatus from "./pages/citizen/ComplainStatus";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import MapPage from "./pages/admin/MapPage";
 
 
 // Optionally later you can uncomment below
@@ -47,6 +48,7 @@ const App = () => (
 
           {/* ✅ Admin Route */}
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/verify" element={<MapPage />} />
 
         </Routes>
       </BrowserRouter>

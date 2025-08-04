@@ -23,14 +23,14 @@ const CitizenPanel = () => {
         className="flex flex-col gap-6 w-full max-w-md"
       >
         <button
-          onClick={() => navigate("/complain")}
+          onClick={() => navigate("/complaint-form")}
           className="bg-[#d62828] text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:bg-[#ba1b1b] transition duration-300"
         >
           ✍️ File a New Complaint
         </button>
 
         <button
-          onClick={() => navigate("/complaints")}
+          onClick={() => navigate("/complaint-dashboard")}
           className="bg-[#003049] text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:bg-[#001f2e] transition duration-300"
         >
           📋 View Complaint Status

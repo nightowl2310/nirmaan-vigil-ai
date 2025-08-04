@@ -19,7 +19,7 @@ const ComplainDone = () => {
     // ⏳ Redirect after 3 seconds
     const timer = setTimeout(() => {
       navigate("/complaint-dashboard"); // 🔁 Redirect to dashboard
-    }, 6000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
