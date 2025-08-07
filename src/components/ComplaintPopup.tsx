@@ -54,6 +54,12 @@ const ComplaintPopup: React.FC<ComplaintPopupProps> = ({ complaint, onClose }) =
           Verify
         </button>
         <button
+        onClick={()=>navigate('/verify')}
+          className="mt-6 w-full bg-red-500 hover:bg-orange-600 text-white py-2 rounded-lg"
+        >
+          Send to Department
+        </button>
+        <button
           onClick={onClose}
           className="mt-6 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg"
         >

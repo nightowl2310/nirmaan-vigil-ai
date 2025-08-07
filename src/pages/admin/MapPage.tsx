@@ -8,10 +8,13 @@ function MapPage() {
   const geoJsonLayerRef = useRef<GeoJSON | null>(null);
 
   useEffect(() => {
-    // Initialize map
+    // Prevent map from being initialized more than once
+    if (mapRef.current) return;
+
     const map = L.map('map').setView([22.7196, 75.8577], 15);
     mapRef.current = map;
 
+    // Add tile layer
     L.tileLayer(
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
       {
@@ -23,7 +26,14 @@ function MapPage() {
     // Load polygons from backend
     const loadBoxes = () => {
       const bounds = map.getBounds();
-      const url = `https://buildingint.onrender.com/geojson?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}`;
+      const isDev = import.meta.env.MODE === 'development';
+
+const baseUrl = isDev
+  ? '/geojson' // goes through Vite proxy
+  : 'https://buildingint.onrender.com/geojson'; // full URL in production
+
+const url = `${baseUrl}?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}`;
+
 
       fetch(url)
         .then((response) => response.json())
@@ -49,7 +59,7 @@ function MapPage() {
                 <b>UID:</b> ${p.UID ?? '-'}<br>
                 <b>Lat:</b> ${p.latitude ?? '-'}<br>
                 <b>Lng:</b> ${p.longitude ?? '-'}<br><br>
-                <div class="popup-buttons"></div>
+
               `;
 
               layer.bindPopup(popupDiv);
@@ -60,8 +70,8 @@ function MapPage() {
                   btn.addEventListener('click', () => {
                     const color = btn.dataset.color;
                     const pathLayer = layer as L.Path & { feature: any };
-pathLayer.setStyle({ fillColor: color, color: color });
-pathLayer.feature.properties.color = color;
+                    pathLayer.setStyle({ fillColor: color, color: color });
+                    pathLayer.feature.properties.color = color;
                   });
                 });
               });
@@ -77,7 +87,10 @@ pathLayer.feature.properties.color = color;
     };
 
     map.on('moveend zoomend', loadBoxes);
-    map.whenReady(loadBoxes);
+    map.whenReady(() => {
+      // Delay the first load to avoid premature bounds fetching
+      setTimeout(loadBoxes, 500);
+    });
 
     return () => {
       map.off();
