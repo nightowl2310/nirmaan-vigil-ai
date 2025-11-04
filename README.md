@@ -71,3 +71,65 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+# Nirmaan Vigil AI - Encroachment Detection System
+
+## Project Overview
+
+Nirmaan Vigil AI is an AI-powered monitoring system that detects and reports illegal land encroachments in real-time using aerial imagery and satellite data. The system helps city officials monitor public lands, roads, and community spaces to prevent unauthorized constructions that disrupt city planning.
+
+## Key Features
+
+### Computer Vision & Drone Data Analysis
+- AI models to identify changes in land usage from aerial imagery
+- Real-time detection of unauthorized constructions
+- Integration with drone data for high-resolution monitoring
+
+### Administrative Dashboard
+- Interactive map interface for officials to verify encroachment reports
+- Status tracking for all reported cases
+- Data visualization for trend analysis
+
+### Predictive Analytics
+- AI models to predict high-risk areas for future encroachments
+- Risk scoring for different zones
+- Proactive monitoring recommendations
+
+## How to Run This Project
+
+To run this project locally, follow these steps:
+
+```sh
+# Step 1: Navigate to the project directory.
+cd nirmaan-vigil-ai
+
+# Step 2: Install the necessary dependencies.
+npm install
+
+# Step 3: Start the development server with auto-reloading and an instant preview.
+npm run dev
+```
+
+The application will be available at http://localhost:8080
+
+## Technologies Used
+
+This project is built with:
+
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
+- Leaflet Maps
+- Recharts for data visualization
+
+## Deployment
+
+To build the project for production, run:
+
+```sh
+npm run build
+```
+
+The built files will be available in the `dist` directory, which can be deployed to any static hosting service.

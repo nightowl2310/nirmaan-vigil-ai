@@ -2,6 +2,8 @@
 import { useEffect, useRef } from 'react';
 import L, { Map as LeafletMap, GeoJSON } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { motion } from 'framer-motion';
+import { Eye, AlertTriangle, MapPin, Zap } from 'lucide-react';
 
 function MapPage() {
   const mapRef = useRef<LeafletMap | null>(null);
@@ -28,12 +30,11 @@ function MapPage() {
       const bounds = map.getBounds();
       const isDev = import.meta.env.MODE === 'development';
 
-const baseUrl = isDev
-  ? '/geojson' // goes through Vite proxy
-  : 'https://buildingint.onrender.com/geojson'; // full URL in production
+      const baseUrl = isDev
+        ? '/geojson' // goes through Vite proxy
+        : 'https://buildingint.onrender.com/geojson'; // full URL in production
 
-const url = `${baseUrl}?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}`;
-
+      const url = `${baseUrl}?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}`;
 
       fetch(url)
         .then((response) => response.json())
@@ -43,14 +44,17 @@ const url = `${baseUrl}?north=${bounds.getNorth()}&south=${bounds.getSouth()}&ea
           }
 
           const geoJsonLayer = L.geoJSON(data, {
-            style: (feature: any) => ({
-              color: feature.properties.color || 'red',
-              fillColor: feature.properties.color || 'red',
-              weight: 2,
-              fillOpacity: 0.4,
-            }),
+            style: (feature) => {
+              const properties = feature?.properties || {};
+              return {
+                color: properties.color || 'red',
+                fillColor: properties.color || 'red',
+                weight: 2,
+                fillOpacity: 0.4,
+              };
+            },
             onEachFeature: (feature, layer) => {
-              const p = feature.properties;
+              const p = feature.properties || {};
 
               const popupDiv = document.createElement('div');
               popupDiv.innerHTML = `
@@ -59,6 +63,8 @@ const url = `${baseUrl}?north=${bounds.getNorth()}&south=${bounds.getSouth()}&ea
                 <b>UID:</b> ${p.UID ?? '-'}<br>
                 <b>Lat:</b> ${p.latitude ?? '-'}<br>
                 <b>Lng:</b> ${p.longitude ?? '-'}<br><br>
+                <b>Risk Level:</b> ${p.risk_level ?? 'Unknown'}<br>
+                <b>Last Scanned:</b> ${p.last_scanned ?? 'N/A'}<br>
 
               `;
 
@@ -66,12 +72,16 @@ const url = `${baseUrl}?north=${bounds.getNorth()}&south=${bounds.getSouth()}&ea
 
               layer.on('popupopen', () => {
                 const buttons = popupDiv.querySelectorAll('button');
-                buttons.forEach((btn: any) => {
+                buttons.forEach((btn) => {
                   btn.addEventListener('click', () => {
-                    const color = btn.dataset.color;
-                    const pathLayer = layer as L.Path & { feature: any };
-                    pathLayer.setStyle({ fillColor: color, color: color });
-                    pathLayer.feature.properties.color = color;
+                    const target = btn as HTMLButtonElement;
+                    const color = target.dataset.color;
+                    if (color && layer instanceof L.Path) {
+                      layer.setStyle({ fillColor: color, color: color });
+                      if (feature.properties) {
+                        feature.properties.color = color;
+                      }
+                    }
                   });
                 });
               });
@@ -98,7 +108,68 @@ const url = `${baseUrl}?north=${bounds.getNorth()}&south=${bounds.getSouth()}&ea
     };
   }, []);
 
-  return <div id="map" className="h-screen w-full" />;
+  return (
+    <div className="h-screen w-full relative">
+      <div id="map" className="h-full w-full"></div>
+      
+      {/* Map Controls Overlay */}
+      <div className="absolute top-4 left-4 bg-white rounded-xl shadow-lg p-4 z-[1000]">
+        <h2 className="text-lg font-bold mb-3 text-gray-800">Encroachment Detection</h2>
+        <div className="space-y-2">
+          <div className="flex items-center">
+            <div className="w-4 h-4 bg-red-500 rounded mr-2"></div>
+            <span className="text-sm">High Risk</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-4 h-4 bg-yellow-500 rounded mr-2"></div>
+            <span className="text-sm">Medium Risk</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-4 h-4 bg-green-500 rounded mr-2"></div>
+            <span className="text-sm">Low Risk</span>
+          </div>
+        </div>
+      </div>
+      
+      {/* Stats Panel */}
+      <div className="absolute top-4 right-4 bg-white rounded-xl shadow-lg p-4 z-[1000]">
+        <h3 className="font-bold text-gray-800 mb-2">Detection Stats</h3>
+        <div className="space-y-1">
+          <div className="flex items-center text-sm">
+            <Eye className="w-4 h-4 mr-2 text-blue-500" />
+            <span>Active Monitoring: 127 zones</span>
+          </div>
+          <div className="flex items-center text-sm">
+            <AlertTriangle className="w-4 h-4 mr-2 text-yellow-500" />
+            <span>Alerts Today: 8</span>
+          </div>
+          <div className="flex items-center text-sm">
+            <Zap className="w-4 h-4 mr-2 text-green-500" />
+            <span>AI Accuracy: 96%</span>
+          </div>
+        </div>
+      </div>
+      
+      {/* Legend */}
+      <div className="absolute bottom-4 left-4 bg-white rounded-xl shadow-lg p-4 z-[1000]">
+        <h3 className="font-bold text-gray-800 mb-2">Map Legend</h3>
+        <div className="space-y-1 text-sm">
+          <div className="flex items-center">
+            <MapPin className="w-4 h-4 mr-2 text-red-500" />
+            <span>Detected Encroachment</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-4 h-4 bg-blue-200 border border-blue-500 mr-2"></div>
+            <span>Public Land</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-4 h-4 bg-green-200 border border-green-500 mr-2"></div>
+            <span>Verified Legal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default MapPage;

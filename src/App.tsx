@@ -10,8 +10,6 @@ import Login from "./pages/Login";
 import CitizenPanel from "./pages/CitizenPanel";
 import ComplaintDashboard from "./pages/citizen/ComplaintDashboard";
 
-
-
 // ✅ Updated paths after moving to /citizen folder
 import ComplaintForm from "./pages/citizen/ComplaintForm";
 import ComplainDone from "./pages/citizen/ComplainDone";
@@ -19,7 +17,7 @@ import ComplainDone from "./pages/citizen/ComplainDone";
 import ComplaintStatus from "./pages/citizen/ComplainStatus";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import MapPage from "./pages/admin/MapPage";
-
+import AnalyticsPage from "./pages/admin/AnalyticsPage";
 
 // Optionally later you can uncomment below
 // import AdminDashboard from "./pages/AdminDashboard";
@@ -46,9 +44,10 @@ const App = () => (
           <Route path="/complaint-dashboard" element={<ComplaintDashboard />} />
           <Route path="/complaint-status" element={<ComplaintStatus />} />
 
-          {/* ✅ Admin Route */}
+          {/* ✅ Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/verify" element={<MapPage />} />
+          <Route path="/admin/map" element={<MapPage />} />
+          <Route path="/admin/analytics" element={<AnalyticsPage />} />
 
         </Routes>
       </BrowserRouter>

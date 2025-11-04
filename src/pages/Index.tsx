@@ -4,6 +4,7 @@ import AboutSection from "@/components/AboutSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import IMCSection from "@/components/IMCSection";
 import Footer from "@/components/Footer";
+import PredictiveAnalytics from "@/components/PredictiveAnalytics";
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <HeroSection />
       <AboutSection />
       <HowItWorksSection />
+      <PredictiveAnalytics />
       <IMCSection />
       <Footer />
     </div>

@@ -5,23 +5,23 @@ const AboutSection = () => {
   const features = [
     {
       icon: Eye,
-      title: "Citizen Reporting",
-      description: "Web and mobile-based platform for citizens to report suspected illegal constructions."
+      title: "Real-time Monitoring",
+      description: "Continuous surveillance of public lands, roads, and community spaces using satellite imagery and drone data."
     },
     {
       icon: Brain,
-      title: "AI-Based Detection",
-      description: "Upload a photo, tag location, and let our AI Floor Detection System verify against permitted limits."
+      title: "AI-Powered Detection",
+      description: "Advanced computer vision algorithms to automatically identify unauthorized constructions and land usage changes."
     },
     {
       icon: MapPin,
-      title: "Digital Pata Integration",
-      description: "Integrated with IMC's 'Har Ghar Ka Digital Pata' project for precise site tagging and accountability."
+      title: "Geospatial Analysis",
+      description: "Interactive mapping interface for officials to verify reports and track encroachment cases with precision."
     },
     {
       icon: Shield,
-      title: "Transparency & Enforcement",
-      description: "Faster enforcement with complete transparency in the reporting and verification process."
+      title: "Predictive Analytics",
+      description: "Machine learning models to predict high-risk areas for future encroachments and enable proactive monitoring."
     }
   ];
 
@@ -30,11 +30,11 @@ const AboutSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            About NirmanChecker
+            About Nirmaan Vigil AI
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            A revolutionary digital platform that empowers citizens to report illegal constructions 
-            and helps build a legally compliant Indore through AI-powered verification.
+            An advanced AI-powered system that helps government officials monitor and prevent illegal land encroachments 
+            through real-time detection and predictive analytics.
           </p>
         </div>
         

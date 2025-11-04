@@ -24,16 +24,16 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">NC</span>
+                <span className="text-white font-bold text-lg">NV</span>
               </div>
               <div>
-                <h3 className="text-xl font-bold">NirmanChecker</h3>
+                <h3 className="text-xl font-bold">Nirmaan Vigil AI</h3>
                 <p className="text-primary-foreground/80 text-sm">By Indore Municipal Corporation</p>
               </div>
             </div>
             <p className="text-primary-foreground/80 mb-4">
-              Empowering citizens to report illegal constructions and build a legally compliant Indore 
-              through AI-powered technology.
+              AI-powered monitoring system for real-time detection of illegal land encroachments 
+              using aerial imagery and satellite data.
             </p>
             <div className="flex space-x-3">
               {socialLinks.map((social, index) => (

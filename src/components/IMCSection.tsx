@@ -6,18 +6,18 @@ const IMCSection = () => {
   const facts = [
     {
       icon: Building,
-      title: "Municipal Governance",
-      description: "Governing body of Indore, Madhya Pradesh, administering infrastructure and public services."
+      title: "Smart City Initiative",
+      description: "Leveraging technology to build a more transparent and efficient municipal governance system."
     },
     {
       icon: Users,
-      title: "Democratic Leadership",
-      description: "Headed by a mayor and elected representatives ensuring democratic governance."
+      title: "Citizen Engagement",
+      description: "Empowering citizens to participate in city planning and report violations through digital platforms."
     },
     {
       icon: MapPin,
-      title: "Rich Municipal Body",
-      description: "One of the richest municipal bodies in Madhya Pradesh with robust financial management."
+      title: "Urban Planning",
+      description: "Using data-driven insights to make informed decisions about land usage and development policies."
     }
   ];
 
@@ -42,9 +42,9 @@ const IMCSection = () => {
             </div>
             
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              Indore Municipal Corporation (IMC) is the governing body of Indore, Madhya Pradesh. 
-              As a progressive municipal corporation, IMC is committed to leveraging technology 
-              and citizen participation to build a better, more transparent city.
+              Indore Municipal Corporation (IMC) is at the forefront of smart city governance, 
+              using innovative technologies like Nirmaan Vigil AI to protect public spaces and 
+              ensure sustainable urban development.
             </p>
             
             <div className="space-y-4 mb-8">
@@ -76,28 +76,28 @@ const IMCSection = () => {
             <Card className="border-0 shadow-lg bg-card">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-accent mb-2">24/7</div>
-                <p className="text-sm text-muted-foreground">Citizen Services</p>
+                <p className="text-sm text-muted-foreground">Monitoring Coverage</p>
               </CardContent>
             </Card>
             
             <Card className="border-0 shadow-lg bg-card">
               <CardContent className="p-6 text-center">
-                <div className="text-3xl font-bold text-accent mb-2">50+</div>
-                <p className="text-sm text-muted-foreground">Digital Initiatives</p>
+                <div className="text-3xl font-bold text-accent mb-2">98%</div>
+                <p className="text-sm text-muted-foreground">Detection Accuracy</p>
               </CardContent>
             </Card>
             
             <Card className="border-0 shadow-lg bg-card">
               <CardContent className="p-6 text-center">
-                <div className="text-3xl font-bold text-accent mb-2">35L+</div>
-                <p className="text-sm text-muted-foreground">Citizens Served</p>
+                <div className="text-3xl font-bold text-accent mb-2">500+</div>
+                <p className="text-sm text-muted-foreground">Encroachments Prevented</p>
               </CardContent>
             </Card>
             
             <Card className="border-0 shadow-lg bg-card">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-accent mb-2">#1</div>
-                <p className="text-sm text-muted-foreground">Cleanest City India</p>
+                <p className="text-sm text-muted-foreground">Smart City India</p>
               </CardContent>
             </Card>
           </div>

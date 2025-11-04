@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useComplaintStore } from "@/store/complaintStore";
@@ -22,6 +22,32 @@ const ComplaintForm: React.FC = () => {
     images: [] as File[],
   });
 
+  const [saveInfo, setSaveInfo] = useState(false);
+
+  // Load saved user info on component mount
+  useEffect(() => {
+    const savedUserInfo = localStorage.getItem("userComplaintInfo");
+    if (savedUserInfo) {
+      try {
+        const parsedInfo = JSON.parse(savedUserInfo);
+        setFormData(prev => ({
+          ...prev,
+          name: parsedInfo.name || "",
+          email: parsedInfo.email || "",
+          mobile: parsedInfo.mobile || "",
+          house: parsedInfo.house || "",
+          street: parsedInfo.street || "",
+          city: parsedInfo.city || "",
+          state: parsedInfo.state || "",
+          pincode: parsedInfo.pincode || "",
+        }));
+        setSaveInfo(true);
+      } catch (e) {
+        console.error("Failed to parse saved user info", e);
+      }
+    }
+  }, []);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -42,8 +68,30 @@ const ComplaintForm: React.FC = () => {
     }
   };
 
+  const handleSaveInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSaveInfo(e.target.checked);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Save user info if requested
+    if (saveInfo) {
+      const userInfo = {
+        name: formData.name,
+        email: formData.email,
+        mobile: formData.mobile,
+        house: formData.house,
+        street: formData.street,
+        city: formData.city,
+        state: formData.state,
+        pincode: formData.pincode,
+      };
+      localStorage.setItem("userComplaintInfo", JSON.stringify(userInfo));
+    } else {
+      // Clear saved info if user unchecks the option
+      localStorage.removeItem("userComplaintInfo");
+    }
 
     const fullComplaint = {
       name: formData.name,
@@ -54,6 +102,21 @@ const ComplaintForm: React.FC = () => {
 
     addComplaint(fullComplaint);
     navigate("/complain_done");
+  };
+
+  const handleAutofill = () => {
+    // For demo purposes, we'll fill with sample data
+    setFormData(prev => ({
+      ...prev,
+      name: "John Doe",
+      email: "johndoe@example.com",
+      mobile: "9876543210",
+      house: "123",
+      street: "Main Street",
+      city: "Indore",
+      state: "Madhya Pradesh",
+      pincode: "452001",
+    }));
   };
 
   return (
@@ -68,11 +131,22 @@ const ComplaintForm: React.FC = () => {
         Submit Your Complaint 🚨
       </h2>
 
+      <div className="mb-6">
+        <button
+          type="button"
+          onClick={handleAutofill}
+          className="text-sm text-blue-600 hover:text-blue-800 underline"
+        >
+          Autofill with sample data
+        </button>
+      </div>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           name="name"
           placeholder="Full Name"
           required
+          value={formData.name}
           onChange={handleChange}
           className="w-full p-2 border rounded-md"
         />
@@ -81,6 +155,7 @@ const ComplaintForm: React.FC = () => {
           placeholder="Email"
           type="email"
           required
+          value={formData.email}
           onChange={handleChange}
           className="w-full p-2 border rounded-md"
         />
@@ -88,6 +163,7 @@ const ComplaintForm: React.FC = () => {
           name="mobile"
           placeholder="Mobile Number"
           required
+          value={formData.mobile}
           onChange={handleChange}
           className="w-full p-2 border rounded-md"
         />
@@ -95,6 +171,7 @@ const ComplaintForm: React.FC = () => {
           name="house"
           placeholder="House No."
           required
+          value={formData.house}
           onChange={handleChange}
           className="w-full p-2 border rounded-md"
         />
@@ -102,6 +179,7 @@ const ComplaintForm: React.FC = () => {
           name="street"
           placeholder="Street Name"
           required
+          value={formData.street}
           onChange={handleChange}
           className="w-full p-2 border rounded-md"
         />
@@ -109,6 +187,7 @@ const ComplaintForm: React.FC = () => {
           name="city"
           placeholder="City"
           required
+          value={formData.city}
           onChange={handleChange}
           className="w-full p-2 border rounded-md"
         />
@@ -116,6 +195,7 @@ const ComplaintForm: React.FC = () => {
           name="state"
           placeholder="State"
           required
+          value={formData.state}
           onChange={handleChange}
           className="w-full p-2 border rounded-md"
         />
@@ -123,12 +203,14 @@ const ComplaintForm: React.FC = () => {
           name="pincode"
           placeholder="Pincode"
           required
+          value={formData.pincode}
           onChange={handleChange}
           className="w-full p-2 border rounded-md"
         />
         <input
           name="optionalName"
           placeholder="Complainant Name (Optional)"
+          value={formData.optionalName}
           onChange={handleChange}
           className="w-full p-2 border rounded-md"
         />
@@ -136,6 +218,7 @@ const ComplaintForm: React.FC = () => {
           name="reason"
           placeholder="Describe your complaint"
           required
+          value={formData.reason}
           onChange={handleChange}
           className="w-full p-2 border rounded-md h-24 resize-none"
         ></textarea>
@@ -170,6 +253,19 @@ const ComplaintForm: React.FC = () => {
               ))}
             </ul>
           )}
+        </div>
+
+        <div className="flex items-center">
+          <input
+            id="saveInfo"
+            type="checkbox"
+            checked={saveInfo}
+            onChange={handleSaveInfoChange}
+            className="w-4 h-4 text-blue-600 rounded"
+          />
+          <label htmlFor="saveInfo" className="ml-2 text-sm text-gray-700">
+            Save my information for future complaints
+          </label>
         </div>
 
         <motion.button

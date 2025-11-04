@@ -1,43 +1,43 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Camera, MapPin, Brain, Gift, Shield, Clock } from "lucide-react";
+import { Satellite, Cpu, Map, Zap, Shield, Clock } from "lucide-react";
 
 const HowItWorksSection = () => {
   const steps = [
     {
       number: "01",
-      icon: Camera,
-      title: "Capture & Upload",
-      description: "Take a photo of the suspected construction site and upload it to the platform securely."
+      icon: Satellite,
+      title: "Data Collection",
+      description: "Satellite imagery and drone data are collected regularly to monitor land usage changes across the city."
     },
     {
       number: "02", 
-      icon: MapPin,
-      title: "Tag Location",
-      description: "Select or scan the address using QR (Digital Pata) integration for precise location tagging."
+      icon: Cpu,
+      title: "AI Analysis",
+      description: "Computer vision models analyze the imagery to detect unauthorized constructions and encroachments automatically."
     },
     {
       number: "03",
-      icon: Brain,
-      title: "Let AI Verify",
-      description: "Our system analyzes the image and forwards verified cases to departments. Get rewarded for valid reports."
+      icon: Map,
+      title: "Verification & Tracking",
+      description: "Officials use the interactive dashboard to verify reports, track cases, and coordinate enforcement actions."
     }
   ];
 
   const highlights = [
     {
       icon: Shield,
-      title: "Anonymous Reporting",
-      description: "Reports stay anonymous unless you opt-in for rewards."
+      title: "Real-time Detection",
+      description: "Identify encroachments as soon as they occur with continuous monitoring capabilities."
     },
     {
       icon: Clock,
-      title: "Faster Enforcement",
-      description: "Quick verification and faster action on illegal constructions."
+      title: "Predictive Analytics",
+      description: "AI models predict high-risk zones for proactive monitoring and prevention."
     },
     {
-      icon: Gift,
-      title: "Citizen Rewards",
-      description: "Get a share of fines imposed on verified illegal constructions."
+      icon: Zap,
+      title: "Efficient Enforcement",
+      description: "Streamlined workflow from detection to resolution reduces response time significantly."
     }
   ];
 
@@ -46,10 +46,10 @@ const HowItWorksSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            How It Works for Citizens
+            How Nirmaan Vigil AI Works
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Simple 3-step process to report illegal constructions and help build a better Indore
+            Advanced technology pipeline for detecting and managing illegal encroachments
           </p>
         </div>
 
@@ -96,7 +96,7 @@ const HowItWorksSection = () => {
         {/* Highlights */}
         <div className="bg-muted/30 rounded-2xl p-8">
           <h3 className="text-2xl font-bold text-center text-foreground mb-8">
-            Why Choose NirmanChecker?
+            Key Benefits
           </h3>
           <div className="grid md:grid-cols-3 gap-6">
             {highlights.map((highlight, index) => (
