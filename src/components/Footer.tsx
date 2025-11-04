@@ -27,7 +27,7 @@ const Footer = () => {
                 <span className="text-white font-bold text-lg">NV</span>
               </div>
               <div>
-                <h3 className="text-xl font-bold">Nirmaan Vigil AI</h3>
+                <h3 className="text-xl font-bold">Nirmaan   AI</h3>
                 <p className="text-primary-foreground/80 text-sm">By Indore Municipal Corporation</p>
               </div>
             </div>

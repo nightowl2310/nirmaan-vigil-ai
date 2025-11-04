@@ -12,7 +12,7 @@ const Header = () => {
             <span className="text-primary-foreground font-bold text-lg">NV</span>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-foreground">Nirmaan Vigil AI</h1>
+            <h1 className="text-xl font-bold text-foreground">Nirmaan   AI</h1>
             <p className="text-xs text-muted-foreground">By Indore Municipal Corporation</p>
           </div>
         </div>

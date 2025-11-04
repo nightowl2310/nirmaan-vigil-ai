@@ -72,11 +72,11 @@ To connect a domain, navigate to Project > Settings > Domains and click Connect 
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
 
-# Nirmaan Vigil AI - Encroachment Detection System
+# Nirmaan   AI - Encroachment Detection System
 
 ## Project Overview
 
-Nirmaan Vigil AI is an AI-powered monitoring system that detects and reports illegal land encroachments in real-time using aerial imagery and satellite data. The system helps city officials monitor public lands, roads, and community spaces to prevent unauthorized constructions that disrupt city planning.
+Nirmaan   AI is an AI-powered monitoring system that detects and reports illegal land encroachments in real-time using aerial imagery and satellite data. The system helps city officials monitor public lands, roads, and community spaces to prevent unauthorized constructions that disrupt city planning.
 
 ## Key Features
 
@@ -101,7 +101,7 @@ To run this project locally, follow these steps:
 
 ```sh
 # Step 1: Navigate to the project directory.
-cd nirmaan-vigil-ai
+cd nirmaan- -ai
 
 # Step 2: Install the necessary dependencies.
 npm install

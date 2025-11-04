@@ -43,7 +43,7 @@ const IMCSection = () => {
             
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               Indore Municipal Corporation (IMC) is at the forefront of smart city governance, 
-              using innovative technologies like Nirmaan Vigil AI to protect public spaces and 
+              using innovative technologies like Nirmaan   AI to protect public spaces and 
               ensure sustainable urban development.
             </p>
             
