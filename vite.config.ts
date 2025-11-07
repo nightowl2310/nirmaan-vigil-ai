@@ -7,16 +7,127 @@ export default defineConfig({
   server: {
     host: "::",
     port: 8080,
-    proxy: {
-      '/geojson': {
-        target: 'https://buildingint.onrender.com',
-        changeOrigin: true,
-        secure: true,
-      },
-    },
   },
   plugins: [
     react(),
+    {
+      name: 'geojson-middleware',
+      configureServer(server) {
+        server.middlewares.use('/geojson', (req, res, next) => {
+          // Mock geojson endpoint
+          if (req.method === 'GET') {
+            // Parse query parameters
+            const url = new URL(req.url || '', `http://${req.headers.host}`);
+            const north = parseFloat(url.searchParams.get('north') || '0');
+            const south = parseFloat(url.searchParams.get('south') || '0');
+            const east = parseFloat(url.searchParams.get('east') || '0');
+            const west = parseFloat(url.searchParams.get('west') || '0');
+            
+            // Mock data - in a real implementation this would filter based on bounds
+            const mockData = {
+              "type": "FeatureCollection",
+              "features": [
+                {
+                  "type": "Feature",
+                  "properties": {
+                    "color": "red",
+                    "area_in_meters": 120.5,
+                    "status": "High Risk",
+                    "UID": "BLDG-001",
+                    "latitude": 22.7201,
+                    "longitude": 75.8582,
+                    "risk_level": "High",
+                    "last_scanned": "2023-10-15"
+                  },
+                  "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [[
+                      [75.8575, 22.7198],
+                      [75.8580, 22.7198],
+                      [75.8580, 22.7202],
+                      [75.8575, 22.7202],
+                      [75.8575, 22.7198]
+                    ]]
+                  }
+                },
+                {
+                  "type": "Feature",
+                  "properties": {
+                    "color": "yellow",
+                    "area_in_meters": 85.3,
+                    "status": "Medium Risk",
+                    "UID": "BLDG-002",
+                    "latitude": 22.7192,
+                    "longitude": 75.8572,
+                    "risk_level": "Medium",
+                    "last_scanned": "2023-10-14"
+                  },
+                  "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [[
+                      [75.8568, 22.7190],
+                      [75.8574, 22.7190],
+                      [75.8574, 22.7194],
+                      [75.8568, 22.7194],
+                      [75.8568, 22.7190]
+                    ]]
+                  }
+                },
+                {
+                  "type": "Feature",
+                  "properties": {
+                    "color": "green",
+                    "area_in_meters": 210.7,
+                    "status": "Low Risk",
+                    "UID": "BLDG-003",
+                    "latitude": 22.7205,
+                    "longitude": 75.8565,
+                    "risk_level": "Low",
+                    "last_scanned": "2023-10-16"
+                  },
+                  "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [[
+                      [75.8560, 22.7202],
+                      [75.8568, 22.7202],
+                      [75.8568, 22.7208],
+                      [75.8560, 22.7208],
+                      [75.8560, 22.7202]
+                    ]]
+                  }
+                }
+              ]
+            };
+            
+            res.setHeader('Content-Type', 'application/json');
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.statusCode = 200;
+            res.end(JSON.stringify(mockData));
+          } else {
+            next();
+          }
+        });
+        
+        // Mock predict endpoint
+        server.middlewares.use('/predict', (req, res, next) => {
+          if (req.method === 'POST') {
+            // Mock prediction response
+            const mockResponse = {
+              predicted_class: "High Risk",
+              class_index: 0,
+              probabilities: [0.85, 0.10, 0.05]
+            };
+            
+            res.setHeader('Content-Type', 'application/json');
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.statusCode = 200;
+            res.end(JSON.stringify(mockResponse));
+          } else {
+            next();
+          }
+        });
+      }
+    }
   ],
   resolve: {
     alias: {

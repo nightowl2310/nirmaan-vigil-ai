@@ -18,6 +18,7 @@ import ComplaintStatus from "./pages/citizen/ComplainStatus";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import MapPage from "./pages/admin/MapPage";
 import AnalyticsPage from "./pages/admin/AnalyticsPage";
+import Dashboard from "./pages/admin/Dashboard";
 
 // Optionally later you can uncomment below
 // import AdminDashboard from "./pages/AdminDashboard";
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/map" element={<MapPage />} />
           <Route path="/admin/analytics" element={<AnalyticsPage />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
 
         </Routes>
       </BrowserRouter>

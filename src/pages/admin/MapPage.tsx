@@ -4,6 +4,19 @@ import L, { Map as LeafletMap, GeoJSON } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { motion } from 'framer-motion';
 import { Eye, AlertTriangle, MapPin, Zap } from 'lucide-react';
+import { fetchGeoData } from '@/data/geoDataService';
+import { FeatureCollection, Geometry } from 'geojson';
+
+interface CustomProperties {
+  color: string;
+  area_in_meters: number;
+  status: string;
+  UID: string;
+  latitude: number;
+  longitude: number;
+  risk_level: string;
+  last_scanned: string;
+}
 
 function MapPage() {
   const mapRef = useRef<LeafletMap | null>(null);
@@ -25,20 +38,17 @@ function MapPage() {
       }
     ).addTo(map);
 
-    // Load polygons from backend
+    // Load polygons from our service
     const loadBoxes = () => {
       const bounds = map.getBounds();
-      const isDev = import.meta.env.MODE === 'development';
-
-      const baseUrl = isDev
-        ? '/geojson' // goes through Vite proxy
-        : 'https://buildingint.onrender.com/geojson'; // full URL in production
-
-      const url = `${baseUrl}?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}`;
-
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
+      
+      fetchGeoData(
+        bounds.getNorth(),
+        bounds.getSouth(),
+        bounds.getEast(),
+        bounds.getWest()
+      )
+        .then((data: FeatureCollection<Geometry, CustomProperties>) => {
           if (geoJsonLayerRef.current) {
             map.removeLayer(geoJsonLayerRef.current);
           }
